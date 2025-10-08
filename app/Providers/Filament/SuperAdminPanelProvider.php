@@ -51,6 +51,7 @@ class SuperAdminPanelProvider extends PanelProvider
             ])
             ->authMiddleware([
                 Authenticate::class,
+                \App\Http\Middleware\EnsureUserHasSuperadminRole::class,
             ]);
     }
 }
