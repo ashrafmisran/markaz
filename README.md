@@ -28,6 +28,7 @@ Sistem idarah mempunyai kategori pengguna (_user roles_) seperti berikut:
 |4.  |treasurer|Bendahari setiap organisasi|add_cashflow|
 |5.  |user|AJK biasa|view_minutes, view_cashflow, view_event
 
+Untuk fungsi ini, sistem ini menggunakan package spatie/laravel dengan fungsi tenant diaktifkan.
 ## Stack digunakan
 - php: versi 8.2 ke atas
 - filament: versi 4.1 ke atas
