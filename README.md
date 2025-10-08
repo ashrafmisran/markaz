@@ -1,4 +1,4 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://www.idarah.com/wp-content/uploads/2022/01/1585047x618626.png" width="400" alt="Logo Idarah"></a></p>
+<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://www.idarah.com/wp-content/uploads/2022/01/1585047x618626.png" width="200" alt="Logo Idarah"></a></p>
 
 ## Tentang Idarah
 
