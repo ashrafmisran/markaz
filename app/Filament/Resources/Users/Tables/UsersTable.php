@@ -33,7 +33,8 @@ class UsersTable
             ])
             ->recordActions([
                 ViewAction::make(),
-                EditAction::make(),
+                EditAction::make()
+                    ->url(fn ($record) => route('filament.admin.resources.users.edit', ['tenant' => request()->route('tenant'), 'record' => $record->getRouteKey()])),
                 Action::make('assign')
                     ->label('Portfolio')
                     ->badge()

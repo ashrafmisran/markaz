@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources\Programs\Schemas;
 
+use App\Models\Team;
 use Filament\Schemas\Schema;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
@@ -14,10 +15,8 @@ class ProgramForm
     {
         return $schema
             ->components([
-                TextInput::make('team_id')
-                    ->default(
-                        fn () => auth()->user()->current_team_id ?? null
-                    )
+                Hidden::make('team_id')
+                    ->default(fn () => Team::where('public_id', request()->route('tenant'))->first()?->id)
                     ->required(),
                 Hidden::make('creator_id')
                     ->default(fn () => auth()->id())

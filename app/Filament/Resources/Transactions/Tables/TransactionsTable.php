@@ -25,7 +25,8 @@ class TransactionsTable
             ])
             ->recordActions([
                 ViewAction::make(),
-                EditAction::make(),
+                EditAction::make()
+                    ->url(fn ($record) => route('filament.admin.resources.transactions.edit', ['tenant' => request()->route('tenant'), 'record' => $record->getRouteKey()])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

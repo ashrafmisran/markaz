@@ -15,8 +15,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CreateSuperAdminSeeder::class,
-            TeamsSeeder::class,
             StatesSeeder::class,
+            DivisionsSeeder::class,
+            TeamsSeeder::class,
+            AccountsSeeder::class, // Make default ledger accounts for all teams
         ]);
     }
 }

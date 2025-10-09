@@ -13,7 +13,8 @@ class ViewUser extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            EditAction::make(),
+            EditAction::make()
+                ->url(fn ($record) => route('filament.admin.resources.users.edit', ['tenant' => request()->route('tenant'), 'record' => $record->getRouteKey()])),
         ];
     }
 }

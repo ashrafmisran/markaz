@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 
 class TeamsSeeder extends Seeder
 {
@@ -15,12 +16,14 @@ class TeamsSeeder extends Seeder
     {
         DB::table('teams')->insert([
             'name' => 'Badan Perhubungan PAS Negeri Sembilan',
+            'public_id' => Str::random(24),
         ]);
 
         $dewan = ['Ulamak','Pemuda','Muslimat','Himpunan Pendokong','Assabiqun'];
         foreach($dewan as $d){
             DB::table('teams')->insert([
                 'name' => 'Dewan '.$d.' PAS Negeri Sembilan',
+                'public_id' => Str::random(24),
             ]);
         }
 
@@ -29,12 +32,14 @@ class TeamsSeeder extends Seeder
             // PAS Kawasan
             DB::table('teams')->insert([
                 'name' => 'PAS Kawasan '.$k,
+                'public_id' => Str::random(24),
             ]);
 
             // Dewan kawasan
             foreach($dewan as $d){
                 DB::table('teams')->insert([
                     'name' => 'Dewan '.$d.' PAS Kawasan '.$k,
+                    'public_id' => Str::random(24),
                 ]);
             }
         }

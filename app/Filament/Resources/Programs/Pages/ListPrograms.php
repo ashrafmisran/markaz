@@ -24,8 +24,8 @@ class ListPrograms extends ListRecords
         return [
             Tab::make('Organisasi ini')
                 ->modifyQueryUsing(fn ($query) => $query->where('team_id', auth()->user()->current_team_id)),
-            Tab::make('Semua organisasi di Negeri Sembilan')
-                ->modifyQueryUsing(fn ($query) => $query),
+                Tab::make('Semua organisasi di Negeri Sembilan')
+                ->modifyQueryUsing(fn ($query) => $query->where('team_id','<>', auth()->user()->current_team_id)),
         ];
     }
 }

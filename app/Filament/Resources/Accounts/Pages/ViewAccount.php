@@ -13,7 +13,8 @@ class ViewAccount extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            EditAction::make(),
+            EditAction::make()
+                ->url(fn ($record) => route('filament.admin.resources.accounts.edit', ['tenant' => request()->route('tenant'), 'record' => $record->getRouteKey()])),
         ];
     }
 }

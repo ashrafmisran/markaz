@@ -17,6 +17,7 @@ use Filament\Actions\DeleteAction;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Actions\Action;
 
 class TeamResource extends Resource
 {
@@ -28,7 +29,6 @@ class TeamResource extends Resource
     {
         return $schema
             ->schema([
-                TextInput::make('id')->required(),
                 TextInput::make('name')->required(),
 
                 // Owner (optional)
@@ -38,19 +38,6 @@ class TeamResource extends Resource
                     ->searchable()
                     ->preload()
                     ->placeholder('Pilih Setiausaha')
-                    ->createOptionForm([
-                        TextInput::make('name')->required(),
-                        TextInput::make('email')->email()->required(),
-                        TextInput::make('password')->required()->password(),
-                    ]),
-
-                // Select existing users to attach to the team
-                Select::make('members')
-                    ->label('AJK')
-                    ->multiple()
-                    ->relationship('members', 'name')
-                    ->searchable()
-                    ->preload()
                     ->createOptionForm([
                         TextInput::make('name')->required(),
                         TextInput::make('email')->email()->required(),
@@ -100,16 +87,52 @@ class TeamResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('id'),
-                TextColumn::make('name'),
-                TextColumn::make('owner.name')->label('Setiausaha'),
+                TextColumn::make('name')
+                    ->searchable()
+                    ->sortable()
+                    ->description(fn ($record): string => $record->owner?->name ? "Admin: {$record->owner->name}" : 'Tiada admin ditetapkan'),
                 TextColumn::make('members_count')->label('Bil. AJK')
                     ->counts('members')
                     ->suffix(' orang'),
             ])
             ->recordActions([
-                EditAction::make(),
-                DeleteAction::make(),
+                EditAction::make()
+                    ->iconButton(),
+                DeleteAction::make()
+                    ->iconButton()
+                    ->requiresConfirmation(),
+                Action::make('add-member')
+                    ->iconButton()
+                    ->form([
+                        Select::make('members')
+                            ->label('Pilih AJK')
+                            ->multiple()
+                            ->relationship('members', 'name')
+                            ->preload()
+                            ->searchable()
+                            ->placeholder('Pilih AJK untuk ditambah')
+                            ->createOptionForm([
+                                TextInput::make('name')->required(),
+                                TextInput::make('email')->email()->required(),
+                                TextInput::make('password')->required()->password(),
+                            ])
+                            ->helperText('Jika AJK belum wujud, mereka akan dicipta secara automatik.'),
+                    ])
+                    ->action(function (Request $request, Team $record, array $data) {
+                        if (empty($data['members']) || ! is_array($data['members'])) {
+                            return;
+                        }
+
+                        $record->members()->attach($data['members']);
+
+                        // If the current user is a member of this team, refresh their session.
+                        if (in_array(Auth::id(), $data['members'] ?? [])) {
+                            Auth::user()->refreshCurrentTeamSession();
+                        }
+                    })
+                    ->requiresConfirmation()
+                    ->color('success')
+                    ->icon('heroicon-o-user-plus')
             ])
             ->headerActions([
                 CreateAction::make()
@@ -122,7 +145,6 @@ class TeamResource extends Resource
         return [
             'index' => Pages\ListTeams::route('/'),
             'create' => Pages\CreateTeam::route('/create'),
-            'edit' => Pages\EditTeam::route('/{record}/edit'),
         ];
     }
 }

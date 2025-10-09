@@ -8,11 +8,20 @@ class Membership extends Model
 {
     protected $fillable = [
         'user_id',
+        'name',
         'mykad',
         'membership_no',
         'state_id',
         'division_id',
         'branch_id',
+        'status',
+        'fee_type',
+        'joined_since',
+        'address',
+        'phone_1',
+        'phone_2',
+        'email',
+        'old_ic',
     ];
 
     public function user()

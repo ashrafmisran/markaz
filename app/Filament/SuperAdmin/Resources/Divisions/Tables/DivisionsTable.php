@@ -25,7 +25,8 @@ class DivisionsTable
             ])
             ->recordActions([
                 ViewAction::make(),
-                EditAction::make(),
+                EditAction::make()
+                    ->url(fn ($record) => route('filament.superadmin.resources.divisions.edit', ['record' => $record->getRouteKey()])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

@@ -4,6 +4,9 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Support\Str;
 
 class Team extends Model
 {
@@ -29,7 +32,7 @@ class Team extends Model
     {
         static::creating(function (Team $team) {
             if (empty($team->public_id)) {
-                $team->public_id = Illuminate\Support\Str::random(24);
+                $team->public_id = Str::random(24);
             }
         });
     }

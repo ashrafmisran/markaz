@@ -13,12 +13,22 @@ return new class extends Migration
     {
         Schema::create('memberships', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
-            $table->string('mykad')->unique();
+            $table->string('name');
+            $table->string('mykad')->nullable();
+            $table->string('old_ic')->nullable();
+            $table->string('sex')->nullable();
             $table->integer('membership_no')->unique();
             $table->foreignId('state_id')->constrained('states');
             $table->foreignId('division_id')->constrained('divisions');
             $table->foreignId('branch_id')->constrained('branches')->nullable()->nullOnDelete();
+            $table->string('status');
+            $table->enum('fee_type', ['lifetime', 'annual']);
+            $table->date('joined_since');
+            $table->string('address')->nullable();
+            $table->string('phone_1')->nullable();
+            $table->string('phone_2')->nullable();
+            $table->string('email')->nullable();
+            $table->foreignId('user_id')->constrained('users')->nullable(); // Only if has account
             $table->timestamps();
         });
     }

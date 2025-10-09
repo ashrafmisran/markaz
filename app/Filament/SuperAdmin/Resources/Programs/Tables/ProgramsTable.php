@@ -25,7 +25,8 @@ class ProgramsTable
             ])
             ->recordActions([
                 ViewAction::make(),
-                EditAction::make(),
+                EditAction::make()
+                    ->url(fn ($record) => route('filament.superadmin.resources.programs.edit', ['record' => $record->getRouteKey()])),
             ])
             ->toolbarActions([
                 BulkActionGroup::make([

@@ -13,7 +13,8 @@ class ViewProgram extends ViewRecord
     protected function getHeaderActions(): array
     {
         return [
-            EditAction::make(),
+            EditAction::make()
+                ->url(fn ($record) => route('filament.superadmin.resources.programs.edit', ['record' => $record->getRouteKey()])),
         ];
     }
 }

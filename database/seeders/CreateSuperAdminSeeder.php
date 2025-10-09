@@ -20,7 +20,8 @@ class CreateSuperAdminSeeder extends Seeder
         $user = User::firstOrCreate([
             'email' => 'admin@pasn9.org',
         ], [
-            'name' => 'Muhammad Ashraf bin Misran - Superadmin',
+            'name' => 'Muhammad Ashraf bin Misran',
+            'mykad' => '911101065717',
             'password' => Hash::make('password'),
         ]);
 
