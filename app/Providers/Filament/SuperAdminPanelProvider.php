@@ -25,6 +25,7 @@ class SuperAdminPanelProvider extends PanelProvider
     {
         return $panel
             ->id('superadmin')
+            ->brandName('Idarah Administration')
             ->path('superadmin')
             ->login()
             ->colors([

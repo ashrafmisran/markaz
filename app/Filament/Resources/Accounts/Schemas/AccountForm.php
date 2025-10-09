@@ -16,7 +16,7 @@ class AccountForm
             ->components([
                 Hidden::make('team_id')
                     ->default(function () {
-                        $user = auth()->user();
+                        $user = auth()->user()->current_team_id;
                         if (! $user) {
                             return null;
                         }

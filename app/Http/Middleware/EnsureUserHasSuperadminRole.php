@@ -21,7 +21,7 @@ class EnsureUserHasSuperadminRole
         }
 
         // Fast path: allow by email
-        if ($user->email === 'superadmin@example.com') {
+        if ($user->email === 'admin@pasn9.org') {
             return $next($request);
         }
 

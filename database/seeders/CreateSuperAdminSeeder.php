@@ -18,16 +18,16 @@ class CreateSuperAdminSeeder extends Seeder
         $role = Role::firstOrCreate(['name' => 'superadmin']);
 
         $user = User::firstOrCreate([
-            'email' => 'superadmin@example.com',
+            'email' => 'admin@pasn9.org',
         ], [
-            'name' => 'Super Admin',
+            'name' => 'Muhammad Ashraf bin Misran - Superadmin',
             'password' => Hash::make('password'),
         ]);
 
         // Ensure there's a team to attach the role to (Spatie teams enabled)
         $team = Team::first();
         if (! $team) {
-            $team = Team::create(['name' => 'Superadmin Team', 'owner_id' => $user->id ?? 1]);
+            $team = Team::create(['name' => 'Jabatan IT PAS Negeri Sembilan', 'owner_id' => $user->id ?? 1]);
             $team->members()->attach($user->id);
         }
 

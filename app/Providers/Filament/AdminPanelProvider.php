@@ -26,6 +26,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
+            ->brandName('Idarah')
             ->id('admin')
             ->path('admin')
             ->login()
