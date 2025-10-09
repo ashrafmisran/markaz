@@ -91,4 +91,14 @@ class User extends Authenticatable implements HasTenants
     {
         return $this->belongsToMany(Team::class, 'team_user')->withTimestamps();
     }
+
+    public function portfolios()
+    {
+        return $this->hasMany(Portfolio::class, 'user_id');
+    }
+
+    public function memberships()
+    {
+        return $this->hasOne(Membership::class, 'user_id');
+    }
 }

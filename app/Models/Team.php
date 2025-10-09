@@ -12,6 +12,7 @@ class Team extends Model
     protected $fillable = [
         'name',
         'owner_id',
+        'public_id',
     ];
 
     public function members()
@@ -22,5 +23,19 @@ class Team extends Model
     public function owner()
     {
         return $this->belongsTo(User::class, 'owner_id');
+    }
+
+    protected static function booted(): void
+    {
+        static::creating(function (Team $team) {
+            if (empty($team->public_id)) {
+                $team->public_id = Illuminate\Support\Str::random(24);
+            }
+        });
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'public_id';
     }
 }

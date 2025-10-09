@@ -28,6 +28,7 @@ class TeamResource extends Resource
     {
         return $schema
             ->schema([
+                TextInput::make('id')->required(),
                 TextInput::make('name')->required(),
 
                 // Owner (optional)

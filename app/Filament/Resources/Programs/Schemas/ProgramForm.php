@@ -14,37 +14,10 @@ class ProgramForm
     {
         return $schema
             ->components([
-                Hidden::make('team_id')
-                    ->default(function () {
-                        $user = auth()->user();
-                        if (! $user) {
-                            return null;
-                        }
-
-                        // Jetstream HasTeams column
-                        if (! empty($user->current_team_id)) {
-                            return $user->current_team_id;
-                        }
-
-                        // If the user exposes a currentTeam() method, use it (guarded)
-                        if (method_exists($user, 'currentTeam')) {
-                            $team = $user->currentTeam();
-                            if ($team) {
-                                return $team->id;
-                            }
-                        }
-
-                        // Fallback to first team via relation (if exists)
-                        if (method_exists($user, 'teams')) {
-                            $team = $user->teams()->first();
-                            if ($team) {
-                                return $team->id;
-                            }
-                        }
-
-                        // last-resort fallback
-                        return $user->team_id ?? null;
-                    })
+                TextInput::make('team_id')
+                    ->default(
+                        fn () => auth()->user()->current_team_id ?? null
+                    )
                     ->required(),
                 Hidden::make('creator_id')
                     ->default(fn () => auth()->id())
