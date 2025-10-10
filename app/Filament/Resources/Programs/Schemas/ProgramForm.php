@@ -2,11 +2,11 @@
 
 namespace App\Filament\Resources\Programs\Schemas;
 
-use Filament\Schemas\Schema;
-use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
-use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\Hidden;
+use Filament\Forms\Components\Textarea;
+use Filament\Forms\Components\TextInput;
+use Filament\Schemas\Schema;
 
 class ProgramForm
 {
@@ -16,34 +16,14 @@ class ProgramForm
             ->components([
                 Hidden::make('team_id')
                     ->default(function () {
-                        $user = auth()->user();
-                        if (! $user) {
-                            return null;
+                        // Get tenant from route parameter (Filament multi-tenancy)
+                        $tenant = request()->route('tenant');
+
+                        if ($tenant) {
+                            return $tenant->id;
                         }
 
-                        // Jetstream HasTeams column
-                        if (! empty($user->current_team_id)) {
-                            return $user->current_team_id;
-                        }
-
-                        // If the user exposes a currentTeam() method, use it (guarded)
-                        if (method_exists($user, 'currentTeam')) {
-                            $team = $user->currentTeam();
-                            if ($team) {
-                                return $team->id;
-                            }
-                        }
-
-                        // Fallback to first team via relation (if exists)
-                        if (method_exists($user, 'teams')) {
-                            $team = $user->teams()->first();
-                            if ($team) {
-                                return $team->id;
-                            }
-                        }
-
-                        // last-resort fallback
-                        return $user->team_id ?? null;
+                        return null;
                     })
                     ->required(),
                 Hidden::make('creator_id')
