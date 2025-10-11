@@ -23,4 +23,9 @@ class Account extends Model
     {
         return $this->belongsTo(Team::class);
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }
