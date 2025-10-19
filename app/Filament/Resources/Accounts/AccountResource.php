@@ -26,6 +26,21 @@ class AccountResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Kewangan';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Laporan Kewangan';
+    }
+
+    public static function getNavigationIcon(): string
+    {
+        return 'heroicon-o-presentation-chart-bar';
+    }
+
     public static function form(Schema $schema): Schema
     {
         return AccountForm::configure($schema);

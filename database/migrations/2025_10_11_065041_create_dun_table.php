@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('dun', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('parliament_id')->constrained('parliament')->onDelete('cascade');
+            $table->string('code');
+            $table->foreignId('parliament_id')->constrained('parliaments')->onDelete('cascade');
             $table->timestamps();
         });
     }

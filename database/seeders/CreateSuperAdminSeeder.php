@@ -28,7 +28,7 @@ class CreateSuperAdminSeeder extends Seeder
         // Ensure there's a team to attach the role to (Spatie teams enabled)
         $team = Team::first();
         if (! $team) {
-            $team = Team::create(['name' => 'Jabatan IT PAS Negeri Sembilan', 'owner_id' => $user->id ?? 1]);
+            $team = Team::create(['name' => 'Badan Perhubungan PAS Negeri Sembilan', 'owner_id' => $user->id ?? 1]);
             $team->members()->attach($user->id);
         }
 

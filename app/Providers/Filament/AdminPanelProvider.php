@@ -19,6 +19,7 @@ use Illuminate\Routing\Middleware\SubstituteBindings;
 use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Models\Team;
+use Filament\Navigation\NavigationGroup;
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -30,6 +31,12 @@ class AdminPanelProvider extends PanelProvider
             ->registration()
             ->id('admin')
             ->path('admin')
+            ->navigationGroups([
+                NavigationGroup::make('Organisasi'),
+                NavigationGroup::make('Kewangan'),
+                NavigationGroup::make('Awam'),
+                NavigationGroup::make('Tetapan'),
+            ])
             ->login()
             ->colors([
                 'primary' => Color::Amber,

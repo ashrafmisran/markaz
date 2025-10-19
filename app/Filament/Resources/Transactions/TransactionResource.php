@@ -24,9 +24,24 @@ class TransactionResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Kewangan';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Rekod Transaksi';
+    }
+
+    public static function getNavigationIcon(): string
+    {
+        return 'heroicon-o-banknotes';
+    }
+
     public static function getNavigationBadge(): ?string
     {
-        return 'PRO';
+        return '5 baru';
     }
 
     public static function form(Schema $schema): Schema

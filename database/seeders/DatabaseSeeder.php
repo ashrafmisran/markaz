@@ -3,7 +3,6 @@
 namespace Database\Seeders;
 
 use App\Models\User;
-// use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -19,6 +18,9 @@ class DatabaseSeeder extends Seeder
             DivisionsSeeder::class,
             TeamsSeeder::class,
             AccountsSeeder::class, // Make default ledger accounts for all teams
+            PeopleSeeder::class,
+            ParliamentsSeeder::class,
+            DunSeeder::class,
         ]);
     }
 }

@@ -14,7 +14,8 @@ use Filament\Resources\Resource;
 use Filament\Schemas\Schema;
 use Filament\Support\Icons\Heroicon;
 use Filament\Tables\Table;
-use Person;
+use App\Models\Person;
+use Illuminate\Database\Eloquent\Builder;
 
 class PersonResource extends Resource
 {
@@ -23,6 +24,29 @@ class PersonResource extends Resource
     protected static string|BackedEnum|null $navigationIcon = Heroicon::OutlinedRectangleStack;
 
     protected static ?string $recordTitleAttribute = 'name';
+
+    public static ?string $tenantOwnershipRelationshipName = null;
+
+
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Awam';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Rakyat';
+    }
+
+    public static function getNavigationIcon(): string
+    {
+        return 'heroicon-o-users';
+    }
+
+    public static function getEloquentQuery() : Builder
+    {
+        return parent::getEloquentQuery()->withoutGlobalScopes();
+    }
 
     public static function form(Schema $schema): Schema
     {

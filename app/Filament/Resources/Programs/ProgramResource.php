@@ -24,6 +24,21 @@ class ProgramResource extends Resource
 
     protected static ?string $recordTitleAttribute = 'name';
 
+    public static function getNavigationGroup(): ?string
+    {
+        return 'Organisasi';
+    }
+
+    public static function getNavigationLabel(): string
+    {
+        return 'Taqwim Program';
+    }
+
+    public static function getNavigationIcon(): string
+    {
+        return 'heroicon-o-calendar-days';
+    }
+
     public static function form(Schema $schema): Schema
     {
         return ProgramForm::configure($schema);

@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('localities', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->foreignId('mukim_id')->constrained('mukim')->onDelete('cascade');
-            $table->foreignId('daerah_mengundi_id')->constrained('daerah_mengundi')->onDelete('cascade');
+            $table->foreignId('mukim_id')->constrained('mukim')->onDelete('cascade')->nullable();
+            $table->foreignId('daerah_mengundi_id')->constrained('daerah_mengundi')->onDelete('cascade')->nullable();
             $table->timestamps();
         });
     }
