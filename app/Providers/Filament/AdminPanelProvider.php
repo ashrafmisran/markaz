@@ -20,6 +20,8 @@ use Illuminate\Session\Middleware\StartSession;
 use Illuminate\View\Middleware\ShareErrorsFromSession;
 use App\Models\Team;
 use Filament\Navigation\NavigationGroup;
+use App\Filament\Pages\Auth\Register;
+
 
 class AdminPanelProvider extends PanelProvider
 {
@@ -28,7 +30,7 @@ class AdminPanelProvider extends PanelProvider
         return $panel
             ->default()
             ->brandName('eMarkaz Admin')
-            ->registration()
+            ->registration(Register::class)
             ->id('admin')
             ->path('admin')
             ->navigationGroups([
