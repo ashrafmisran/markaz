@@ -13,10 +13,10 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-            CreateSuperAdminSeeder::class,
             StatesSeeder::class,
             DivisionsSeeder::class,
             TeamsSeeder::class,
+            // CreateSuperAdminSeeder::class,
             AccountsSeeder::class, // Make default ledger accounts for all teams
             PeopleSeeder::class,
             ParliamentsSeeder::class,

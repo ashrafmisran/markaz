@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('attendances', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mykad')->constrained('people','mykad')->onDelete('cascade');
+            $table->string('mykad',12);
+            $table->foreign('mykad')->references('mykad')->on('people')->onDelete('cascade');
             $table->foreignId('program_id')->constrained('programs')->onDelete('cascade');
             $table->string('type_of_attendance')->nullable();
             $table->dateTime('joined_at')->nullable();

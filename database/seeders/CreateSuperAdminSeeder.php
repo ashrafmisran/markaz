@@ -18,19 +18,26 @@ class CreateSuperAdminSeeder extends Seeder
         $role = Role::firstOrCreate(['name' => 'superadmin']);
 
         $user = User::firstOrCreate([
-            'email' => 'admin@pasn9.org',
+            'email' => 'ashrafmisran@gmail.com',
         ], [
             'name' => 'Muhammad Ashraf bin Misran',
             'mykad' => '911101065717',
-            'password' => Hash::make('password'),
+            'password' => Hash::make(env('ADMIN_PASSWORD', 'password123')),
         ]);
 
-        // Ensure there's a team to attach the role to (Spatie teams enabled)
+        // Attach the user to Badan Perhubungan PAS Negeri Sembilan team and Dewan Pemuda PAS Kawasan Seremban team
+
+                
         $team = Team::first();
         if (! $team) {
             $team = Team::create(['name' => 'Badan Perhubungan PAS Negeri Sembilan', 'owner_id' => $user->id ?? 1]);
-            $team->members()->attach($user->id);
         }
+
+        $team2 = Team::where('name', 'Dewan Pemuda PAS Kawasan Seremban')->first();
+        if (! $team2) {
+            $team2 = Team::create(['name' => 'Dewan Pemuda PAS Kawasan Seremban', 'owner_id' => $user->id ?? 1]);
+        }
+        $user->teams()->syncWithoutDetaching([$team->id, $team2->id]);
 
         // When Spatie teams are enabled, set the registrar's permissions team id
         $registrar = app(\Spatie\Permission\PermissionRegistrar::class);

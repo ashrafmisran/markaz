@@ -27,7 +27,7 @@ class AdminPanelProvider extends PanelProvider
     {
         return $panel
             ->default()
-            ->brandName('Idarah')
+            ->brandName('eMarkaz Admin')
             ->registration()
             ->id('admin')
             ->path('admin')

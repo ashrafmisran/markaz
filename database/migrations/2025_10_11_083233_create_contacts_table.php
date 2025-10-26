@@ -13,7 +13,8 @@ return new class extends Migration
     {
         Schema::create('contacts', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mykad')->constrained('people','mykad')->onDelete('cascade');
+            $table->string('mykad',12);
+            $table->foreign('mykad')->references('mykad')->on('people')->onDelete('cascade');
             $table->enum('type', ['phone', 'email', 'address']);
             $table->string('value');
             $table->boolean('is_primary')->default(false);

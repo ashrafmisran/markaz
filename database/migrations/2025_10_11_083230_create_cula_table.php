@@ -13,9 +13,11 @@ return new class extends Migration
     {
         Schema::create('cula', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('mykad')->constrained('people','mykad')->onDelete('cascade');
+            $table->string('mykad',12)->unique();
+            $table->foreign('mykad')->references('mykad')->on('people')->onDelete('cascade');
             $table->string('source')->nullable();
-            $table->foreignId('kod_cula_id')->constrained('kod_cula','cula_code')->onDelete('cascade');
+            $table->string('kod_cula', 50)->nullable(); // length as needed
+            $table->foreign('kod_cula')->references('cula_code')->on('kod_cula')->onDelete('cascade');
             $table->string('remark')->nullable();
             $table->foreignId('recorded_by')->nullable()->constrained('users');
             $table->timestamps();

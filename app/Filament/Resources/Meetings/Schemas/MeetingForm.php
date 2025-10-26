@@ -3,11 +3,13 @@
 namespace App\Filament\Resources\Meetings\Schemas;
 
 use Filament\Schemas\Schema;
+use Filament\Facades\Filament;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\TimePicker;
+use Filament\Forms\Components\Hidden;
 use Filament\Forms\Components\Select;
-use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\MarkdownEditor;
 
 class MeetingForm
 {
@@ -26,16 +28,17 @@ class MeetingForm
                 TimePicker::make('time')
                     ->label('Masa')
                     ->required(),
-                Select::make('team_id')
-                    ->label('Pasukan')
-                    ->relationship('team', 'name')
-                    ->required(),
+                Hidden::make('team_id')
+                    ->label('Organisasi')
+                    ->default(fn () => Filament::getTenant()->id),
                 TextInput::make('location')
                     ->label('Lokasi')
                     ->maxLength(255),
-                RichEditor::make('minutes')
+                MarkdownEditor::make('minutes')
                     ->label('Minit')
                     ->nullable()
+                    ->fileAttachmentsDisk('local')
+                    ->fileAttachmentsDirectory('attachments')
                     ->columnSpanFull(),
             ]);
     }

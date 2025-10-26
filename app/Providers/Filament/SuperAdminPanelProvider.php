@@ -25,7 +25,7 @@ class SuperAdminPanelProvider extends PanelProvider
     {
         return $panel
             ->id('superadmin')
-            ->brandName('Idarah Administration')
+            ->brandName('eMarkaz System Admin')
             ->path('superadmin')
             ->login()
             ->colors([
