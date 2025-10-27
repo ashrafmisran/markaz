@@ -18,6 +18,7 @@ class Register extends BaseRegister
               FileUpload::make('img_url')
                 ->label('Gambar profil')
                 ->imageEditor()
+                ->image()
                 ->disk('public')
                 ->directory('profile-photos')
                 ->visibility('public')
