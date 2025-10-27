@@ -15,6 +15,11 @@ class TeamsSeeder extends Seeder
     public function run(): void
     {
         DB::table('teams')->insert([
+            'name' => 'PAS Negeri Sembilan',
+            'public_id' => Str::random(24),
+        ]);
+
+        DB::table('teams')->insert([
             'name' => 'Badan Perhubungan PAS Negeri Sembilan',
             'public_id' => Str::random(24),
         ]);

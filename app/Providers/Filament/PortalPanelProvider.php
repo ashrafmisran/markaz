@@ -26,6 +26,7 @@ class PortalPanelProvider extends PanelProvider
     {
         return $panel
             ->id('portal')
+            ->registration(Register::class)
             ->path('portal')
             ->colors([
                 'primary' => Color::Green,
