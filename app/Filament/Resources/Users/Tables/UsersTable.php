@@ -8,6 +8,7 @@ use Filament\Actions\EditAction;
 use Filament\Actions\ViewAction;
 use Filament\Tables\Table;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ImageColumn;
 use Filament\Actions\Action;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Select;
@@ -19,6 +20,11 @@ class UsersTable
         return $table
             ->columns([
                 TextColumn::make('id')->label('ID')->sortable()->searchable(),
+                ImageColumn::make('img_url')
+                    ->label('Gambar Profil')
+                    ->disk('public')
+                    ->defaultImageUrl(url('storage/profile-photos/default.png'))
+                    ->circular(),
                 TextColumn::make('name')->label('Nama')->sortable()->searchable()
                         ->description(fn ($record): string => $record->email),
                 TextColumn::make('portfolios')->label('Portfolio')

@@ -16,8 +16,6 @@ class MeetingsTable
         return $table
             ->columns([
                 TextColumn::make('title')->label('Tajuk')->searchable()->sortable(),
-                TextColumn::make('date')->label('Tarikh')->date()->sortable(),
-                TextColumn::make('time')->label('Masa')->time()->sortable(),
                 TextColumn::make('location')->label('Lokasi')->sortable(),
             ])
             ->filters([

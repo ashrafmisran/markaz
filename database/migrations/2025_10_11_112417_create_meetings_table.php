@@ -15,8 +15,10 @@ return new class extends Migration
             $table->id();
             $table->foreignId('team_id')->constrained('teams')->onDelete('cascade');
             $table->string('title');
-            $table->date('date');
-            $table->time('time')->nullable();
+            $table->date('start_date');
+            $table->time('start_time')->nullable();
+            $table->date('end_date');
+            $table->time('end_time')->nullable();
             $table->string('location')->nullable();
             $table->text('minutes')->nullable();
             $table->timestamps();

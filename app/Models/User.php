@@ -6,14 +6,16 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Filament\Models\Contracts\HasAvatar;
 use Spatie\Permission\Traits\HasRoles;
 use Filament\Models\Contracts\HasTenants;
 use Filament\Panel;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Support\Facades\Storage;
 
-class User extends Authenticatable implements HasTenants
+class User extends Authenticatable implements HasTenants, HasAvatar
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasRoles;
@@ -27,6 +29,7 @@ class User extends Authenticatable implements HasTenants
         'name',
         'email',
         'password',
+        'img_url',
         'mykad',
     ];
 
@@ -101,5 +104,10 @@ class User extends Authenticatable implements HasTenants
     public function memberships()
     {
         return $this->hasOne(Membership::class, 'user_id');
+    }
+
+    public function getFilamentAvatarUrl(): ?string
+    {
+        return $this->img_url ? Storage::disk('public')->url($this->img_url) : null;
     }
 }

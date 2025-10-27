@@ -22,10 +22,16 @@ class MeetingForm
                     ->required()
                     ->maxLength(255)
                     ->columnSpanFull(),
-                DatePicker::make('date')
+                DatePicker::make('start_date')
                     ->label('Tarikh')
                     ->required(),
-                TimePicker::make('time')
+                TimePicker::make('start_time')
+                    ->label('Masa')
+                    ->required(),
+                DatePicker::make('end_date')
+                    ->label('Tarikh')
+                    ->required(),
+                TimePicker::make('end_time')
                     ->label('Masa')
                     ->required(),
                 Hidden::make('team_id')

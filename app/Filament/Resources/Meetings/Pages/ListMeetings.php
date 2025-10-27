@@ -13,6 +13,21 @@ class ListMeetings extends ListRecords
 
     //protected string $view = 'filament.pages.meetings.list';
 
+    public function getTitle(): string
+    {
+        return 'Mesyuarat';
+    }
+
+    public function getSubtitle(): ?string
+    {
+        return 'Senarai Mesyuarat';
+    }
+
+    public function getBreadcrumb(): ?string
+    {
+        return 'Senarai Mesyuarat';
+    }
+
     protected function getHeaderActions(): array
     {
         return [
